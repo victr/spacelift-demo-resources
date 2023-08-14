@@ -26,6 +26,7 @@ resource "spacelift_stack" "EC2-deployment" {
 }
 
 resource "spacelift_stack" "demo-worker-pool" {
+  administrative = true
   space_id = data.spacelift_current_space.this.id
   branch = "main"
   description = "This stack will be in charge of creating our worker pool"
