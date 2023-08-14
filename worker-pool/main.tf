@@ -44,17 +44,17 @@ resource "spacelift_context_attachment" "attachment" {
 }
 
 
-module "my_workerpool" {
-  source = "github.com/spacelift-io/terraform-aws-spacelift-workerpool-on-ec2?ref=v1.3.0"
+# module "my_workerpool" {
+#   source = "github.com/spacelift-io/terraform-aws-spacelift-workerpool-on-ec2?ref=v1.3.0"
 
-  configuration = <<-EOT
-    export SPACELIFT_TOKEN="${var.worker_pool_config}"
-    export SPACELIFT_POOL_PRIVATE_KEY="${var.worker_pool_private_key}"
-  EOT
+#   configuration = <<-EOT
+#     export SPACELIFT_TOKEN="${var.worker_pool_config}"
+#     export SPACELIFT_POOL_PRIVATE_KEY="${var.worker_pool_private_key}"
+#   EOT
 
-  min_size        = 1
-  max_size        = 1
-  worker_pool_id  = spacelift_worker_pool.demo-ASG.id
-  security_groups = data.aws_security_groups.dev_sg.ids
-  vpc_subnets     = data.aws_subnets.dev_public_subnets
-}
+#   min_size        = 1
+#   max_size        = 1
+#   worker_pool_id  = spacelift_worker_pool.demo-ASG.id
+#   security_groups = data.aws_security_groups.dev_sg.ids
+#   vpc_subnets     = data.aws_subnets.dev_public_subnets
+# }
