@@ -37,15 +37,19 @@ resource "spacelift_environment_variable" "worker_pool_subnets" {
   value      = jsonencode([data.aws_subnets.dev_public_subnets])
 }
 
-
+resource "spacelift_context_attachment" "attachment" {
+  context_id = spacelift.context.worker-pool-config.id
+  stack_id   = "demo-worker-pool"
+  priority   = 10
+}
 
 
 module "my_workerpool" {
   source = "github.com/spacelift-io/terraform-aws-spacelift-workerpool-on-ec2?ref=v1.3.0"
 
   configuration = <<-EOT
-    export SPACELIFT_TOKEN="${spacelift_environment_variable.worker_pool_config}"
-    export SPACELIFT_POOL_PRIVATE_KEY="${spacelift_environment_variable.worker_pool_private_key}"
+    export SPACELIFT_TOKEN="${var.worker_pool_config}"
+    export SPACELIFT_POOL_PRIVATE_KEY="${var.worker_pool_private_key}"
   EOT
 
   min_size        = 1
