@@ -19,5 +19,5 @@ output "dev_sg" {
 }
 
 output "subnet" {
-  value = data.aws_subnets.dev_public_subnet
+  value = data.aws_subnets.dev_public_subnets
 }
