@@ -1,7 +1,7 @@
-data "spacelift_space" "demo-resources" {
-  space_id = spacelift_space.demo-resources.id
+data "spacelift_space" "space" {
+  space_id = spacelift_space.space.id
 }
 
-output "space" {
-  value = data.spacelift_space.demo-resources.id
+output "description" {
+  value = data.spacelift_space.space.description
 }
