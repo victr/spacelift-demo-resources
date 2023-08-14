@@ -28,13 +28,13 @@ resource "spacelift_environment_variable" "worker_pool_private_key" {
 resource "spacelift_environment_variable" "worker_pool_security_groups" {
   context_id = spacelift_context.worker-pool-config.id
   name       = "worker_pool_security_groups"
-  value      = [data.aws_security_groups.dev_sg.ids]
+  value      = jsonencode([data.aws_security_groups.dev_sg.ids])
 }
 
 resource "spacelift_environment_variable" "worker_pool_subnets" {
   context_id = spacelift_context.worker-pool-config.id
   name       = "worker_pool_subnets"
-  value      = [data.aws_subnets.dev_public_subnets]
+  value      = jsonencode([data.aws_subnets.dev_public_subnets])
 }
 
 
