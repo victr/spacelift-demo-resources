@@ -1,10 +1,3 @@
-resource "spacelift_context" "worker-pool-config" {
-  description = "Necessary variables"
-  name        = "worker-pool-config"
-  space_id    = data.spacelift_current_space.this.id
-}
-
-
 resource "spacelift_worker_pool" "demo-ASG" {
   name        = "Demo-ASG"
   csr         = filebase64("./spacelift.csr")
@@ -14,34 +7,34 @@ resource "spacelift_worker_pool" "demo-ASG" {
 
 
 resource "spacelift_environment_variable" "worker_pool_config" {
-  context_id = spacelift_context.worker-pool-config.id
+  stack_id = spacelift_stack.demo-worker-pool.id
   name       = "worker_pool_config"
   value      = file("./worker-pool.config")
 }
 
 resource "spacelift_environment_variable" "worker_pool_private_key" {
-  context_id = spacelift_context.worker-pool-config.id
+  stack_id = spacelift_stack.demo-worker-pool.id
   name       = "worker_pool_private_key"
   value      = file("./private.key")
 }
 
 resource "spacelift_environment_variable" "worker_pool_security_groups" {
-  context_id = spacelift_context.worker-pool-config.id
+  stack_id = spacelift_stack.demo-worker-pool.id
   name       = "worker_pool_security_groups"
   value      = jsonencode([data.aws_security_groups.dev_sg.ids])
 }
 
 resource "spacelift_environment_variable" "worker_pool_subnets" {
-  context_id = spacelift_context.worker-pool-config.id
+  stack_id = spacelift_stack.demo-worker-pool.id
   name       = "worker_pool_subnets"
   value      = jsonencode([data.aws_subnets.dev_public_subnets])
 }
 
-resource "spacelift_context_attachment" "attachment" {
-  context_id = spacelift_context.worker-pool-config.id
-  stack_id   = "demo-worker-pool"
-  priority   = 10
-}
+# resource "spacelift_context_attachment" "attachment" {
+#   context_id = spacelift_context.demo-worker-pool.id
+#   stack_id   = "demo-worker-pool"
+#   priority   = 10
+# }
 
 
 # module "my_workerpool" {
