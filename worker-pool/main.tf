@@ -3,11 +3,6 @@ resource "spacelift_context" "worker-pool-config" {
   name        = "worker-pool-config"
   space_id    = data.spacelift_current_space.this.id
 }
-# resource "spacelift_mounted_file" "worker-pool-csr" {
-#   stack_id      = "demo-worker-pool"
-#   relative_path = "spacelift.csr"
-#   content       = filebase64("${path.module}/spacelift.csr")
-# }
 
 
 resource "spacelift_worker_pool" "demo-ASG" {
@@ -18,12 +13,17 @@ resource "spacelift_worker_pool" "demo-ASG" {
 }
 
 
-# resource "spacelift_environment_variable" "worker_pool_config" {
-#   context_id = spacelift_context.worker-pool-config.id
-#   name       = "worker_pool_config"
-#   value      = ""
-#   write_only = false
-# }
+resource "spacelift_environment_variable" "worker_pool_config" {
+  context_id = spacelift_context.worker-pool-config.id
+  name       = "worker_pool_config"
+  value      = file("./worker-pool.config")
+}
+
+resource "spacelift_environment_variable" "worker_pool_private_key" {
+  context_id = spacelift_context.worker-pool-config.id
+  name       = "worker_pool_private_key"
+  value = file("./private.key")
+}
 
 
 
