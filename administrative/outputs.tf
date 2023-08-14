@@ -3,5 +3,5 @@ data "spacelift_space" "demo-resources" {
 }
 
 output "space" {
-  value = data.spacelift_space.demo-resources
+  value = data.spacelift_space.demo-resources.id
 }
