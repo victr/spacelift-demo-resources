@@ -3,7 +3,7 @@ resource "spacelift_stack" "Admin stack" {
   space_id = "root"
   branch            = "main"
   description       = "The admin/manager stack that will deploy all spacelift resources"
-  name              = "Admin stack"
+  name              = "Admin-stack"
   project_root      = "administrative"
   repository        = "demo-resources"
   terraform_smart_sanitization = true
