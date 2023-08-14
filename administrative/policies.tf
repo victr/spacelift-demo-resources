@@ -4,3 +4,13 @@ resource "spacelift_policy" "default-login-policy" {
   type     = "LOGIN"
   space_id = "root"
 }
+
+resource "spacelift_policy" "check-instance-type" {
+  name = "check-instance-type"
+  body = file("../policies/plan/check-instance-type.rego")
+}
+
+resource "spacelift_policy_attachment" "check-instance-type" {
+  policy_id = spacelift_policy.check-instance-type.id
+  stack_id  = spacelift_stack.ec2-deployment.id
+}
