@@ -34,7 +34,7 @@ resource "spacelift_environment_variable" "worker_pool_security_groups" {
 resource "spacelift_environment_variable" "worker_pool_subnets" {
   context_id = spacelift_context.worker-pool-config.id
   name = "worker_pool_subnets"
-  value = data.aws.aws_subnets.dev_public_subnets
+  value = data.aws_subnets.dev_public_subnets
 }
 
 
