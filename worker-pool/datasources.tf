@@ -13,19 +13,3 @@ data "aws_subnets" "dev_public_subnets" {
     values = ["dev_public_subnet"]
   }
 }
-
-output "dev_sg" {
-  value = data.aws_security_groups.dev_sg
-}
-
-output "subnet" {
-  value = data.aws_subnets.dev_public_subnets
-}
-
-data "spacelift_context" "worker-pool-config" {
-  context_id = "worker-pool-config"
-}
-
-output "config" {
-    value = data.spacelift_context.worker-pool-config
-}

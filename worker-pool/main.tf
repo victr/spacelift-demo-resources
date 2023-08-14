@@ -7,34 +7,28 @@ resource "spacelift_worker_pool" "demo-ASG" {
 
 
 resource "spacelift_environment_variable" "worker_pool_config" {
-  stack_id = spacelift_stack.demo-worker-pool.id
+  stack_id = "demo-worker-pool"
   name       = "worker_pool_config"
   value      = file("./worker-pool.config")
 }
 
 resource "spacelift_environment_variable" "worker_pool_private_key" {
-  stack_id = spacelift_stack.demo-worker-pool.id
+  stack_id = "demo-worker-pool"
   name       = "worker_pool_private_key"
   value      = file("./private.key")
 }
 
 resource "spacelift_environment_variable" "worker_pool_security_groups" {
-  stack_id = spacelift_stack.demo-worker-pool.id
+  stack_id = "demo-worker-pool"
   name       = "worker_pool_security_groups"
   value      = jsonencode([data.aws_security_groups.dev_sg.ids])
 }
 
 resource "spacelift_environment_variable" "worker_pool_subnets" {
-  stack_id = spacelift_stack.demo-worker-pool.id
+  stack_id = "demo-worker-pool"
   name       = "worker_pool_subnets"
   value      = jsonencode([data.aws_subnets.dev_public_subnets])
 }
-
-# resource "spacelift_context_attachment" "attachment" {
-#   context_id = spacelift_context.demo-worker-pool.id
-#   stack_id   = "demo-worker-pool"
-#   priority   = 10
-# }
 
 
 # module "my_workerpool" {
