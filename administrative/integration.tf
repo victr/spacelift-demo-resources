@@ -14,6 +14,7 @@ resource "spacelift_aws_integration" "this" {
   # We need to set the ARN manually rather than referencing the role to avoid a circular dependency
   role_arn                       = local.role_arn
   generate_credentials_in_worker = false
+  space_id                       = data.spacelift_current_space.this.id
 }
 
 # data "spacelift_aws_integration_attachment_external_id" "my_stack" {
