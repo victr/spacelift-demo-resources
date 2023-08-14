@@ -1,4 +1,4 @@
-resource "spacelift_stack" "Admin stack" {
+resource "spacelift_stack" "Admin-stack" {
   administrative    = true
   space_id = "root"
   branch            = "main"
