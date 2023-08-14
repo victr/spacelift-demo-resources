@@ -14,5 +14,5 @@ resource "spacelift_policy" "check-instance-type" {
 
 resource "spacelift_policy_attachment" "check-instance-type" {
   policy_id = spacelift_policy.check-instance-type.id
-  stack_id  = spacelift_stack.ec2-deployment.id
+  stack_id  = spacelift_stack.EC2-deployment.id
 }
