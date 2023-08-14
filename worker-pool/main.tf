@@ -38,7 +38,7 @@ resource "spacelift_environment_variable" "worker_pool_subnets" {
 }
 
 resource "spacelift_context_attachment" "attachment" {
-  context_id = spacelift.context.worker-pool-config.id
+  context_id = spacelift_context.worker-pool-config.id
   stack_id   = "demo-worker-pool"
   priority   = 10
 }
