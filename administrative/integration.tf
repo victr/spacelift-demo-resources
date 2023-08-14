@@ -52,3 +52,15 @@ resource "spacelift_aws_integration_attachment" "ec2-deployment-stack" {
     aws_iam_role.this
   ]
 }
+
+resource "spacelift_aws_integration_attachment" "admin-stack" {
+  integration_id = spacelift_aws_integration.this.id
+  stack_id       = "admin-stack"
+  read           = true
+  write          = true
+
+  # The role needs to exist before we attach since we test role assumption during attachment.
+  depends_on = [
+    aws_iam_role.this
+  ]
+}
