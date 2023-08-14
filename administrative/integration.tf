@@ -43,7 +43,7 @@ resource "aws_iam_role_policy_attachment" "this" {
 
 resource "spacelift_aws_integration_attachment" "ec2-deployment-stack" {
   integration_id = spacelift_aws_integration.this.id
-  stack_id       = "my-stack-id"
+  stack_id       = "ec2-deployment"
   read           = true
   write          = true
 
