@@ -1,7 +1,5 @@
-data "spacelift_space" "space" {
-  space_id = spacelift_space.space.id
-}
+data "spacelift_current_space" "this" {}
 
-output "description" {
-  value = data.spacelift_space.space.description
+output "id" {
+  value = data.spacelift_current_space.this
 }
