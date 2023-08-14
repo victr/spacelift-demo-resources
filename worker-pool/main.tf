@@ -14,6 +14,7 @@ resource "spacelift_worker_pool" "demo-ASG" {
   name        = "Demo-ASG"
   csr         = filebase64("./spacelift.csr")
   description = "Used for all type jobs"
+  space_id = data.spacelift.spacelift_current_space.this.id
 }
 
 
