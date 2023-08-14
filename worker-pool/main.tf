@@ -25,6 +25,14 @@ resource "spacelift_environment_variable" "worker_pool_private_key" {
   value = file("./private.key")
 }
 
+resource "spacelift_environment_variable" "worker_pool_security_groups" {
+  context_id = spacelift_context.worker-pool-config.id
+  name = "worker_pool_security_groups"
+  value = data.aws_security_groups.dev_sg.id
+}
+
+
+
 
 
 # module "my_workerpool" {
@@ -37,7 +45,7 @@ resource "spacelift_environment_variable" "worker_pool_private_key" {
 
 #   min_size        = 1
 #   max_size        = 1
-#   worker_pool_id  = var.worker_pool_id
+#   worker_pool_id  = worker_pool.demo-ASG.id
 #   security_groups = var.worker_pool_security_groups
 #   vpc_subnets     = var.worker_pool_subnets
 # }
