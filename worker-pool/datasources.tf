@@ -1,0 +1,1 @@
+data "spacelift_current_space" "this" {}
