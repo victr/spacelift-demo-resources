@@ -15,7 +15,7 @@ data "aws_subnets" "dev_public_subnets" {
 }
 
 output "dev_sg" {
-    value = data.aws_security_groups.dev_sg
+  value = data.aws_security_groups.dev_sg
 }
 
 output "subnet" {

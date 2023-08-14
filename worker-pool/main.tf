@@ -9,7 +9,7 @@ resource "spacelift_worker_pool" "demo-ASG" {
   name        = "Demo-ASG"
   csr         = filebase64("./spacelift.csr")
   description = "Used for all type jobs"
-  space_id = data.spacelift_current_space.this.id
+  space_id    = data.spacelift_current_space.this.id
 }
 
 
@@ -22,19 +22,19 @@ resource "spacelift_environment_variable" "worker_pool_config" {
 resource "spacelift_environment_variable" "worker_pool_private_key" {
   context_id = spacelift_context.worker-pool-config.id
   name       = "worker_pool_private_key"
-  value = file("./private.key")
+  value      = file("./private.key")
 }
 
 resource "spacelift_environment_variable" "worker_pool_security_groups" {
   context_id = spacelift_context.worker-pool-config.id
-  name = "worker_pool_security_groups"
-  value = data.aws_security_groups.dev_sg.ids
+  name       = "worker_pool_security_groups"
+  value      = tolist([data.aws_security_groups.dev_sg.ids])
 }
 
 resource "spacelift_environment_variable" "worker_pool_subnets" {
   context_id = spacelift_context.worker-pool-config.id
-  name = "worker_pool_subnets"
-  value = data.aws_subnets.dev_public_subnets
+  name       = "worker_pool_subnets"
+  value      = tolist([data.aws_subnets.dev_public_subnets])
 }
 
 
