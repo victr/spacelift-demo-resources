@@ -10,7 +10,7 @@ data "aws_security_groups" "dev_sg" {
 data "aws_subnets" "dev_public_subnets" {
   filter {
     name   = "tag:Name"
-    values = ["dev_public_subnets"]
+    values = ["dev_public_subnet"]
   }
 }
 
