@@ -50,7 +50,7 @@ module "my_workerpool" {
 
   min_size        = 1
   max_size        = 1
-  worker_pool_id  = worker_pool.demo-ASG.id
+  worker_pool_id  = spacelift_worker_pool.demo-ASG.id
   security_groups = data.aws_security_groups.dev_sg.ids
   vpc_subnets     = data.aws_subnets.dev_public_subnets
 }
