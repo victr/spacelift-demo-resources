@@ -23,3 +23,32 @@ data "spacelift_aws_integration_attachment_external_id" "ec2-deployment-stack" {
   read           = true
   write          = true
 }
+
+
+resource "aws_iam_role" "this" {
+  name = local.role_name
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      jsondecode(data.spacelift_aws_integration_attachment_external_id.ec2-deployment-stack.assume_role_policy_statement)
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "this" {
+  role       = aws_iam_role.this.name
+  policy_arn = "arn:aws:iam::aws:policy/PowerUserAccess"
+}
+
+resource "spacelift_aws_integration_attachment" "ec2-deployment-stack" {
+  integration_id = spacelift_aws_integration.this.id
+  stack_id       = "my-stack-id"
+  read           = true
+  write          = true
+
+  # The role needs to exist before we attach since we test role assumption during attachment.
+  depends_on = [
+    aws_iam_role.this
+  ]
+}
