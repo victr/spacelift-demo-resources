@@ -8,6 +8,8 @@ resource "spacelift_policy" "default-login-policy" {
 resource "spacelift_policy" "check-instance-type" {
   name = "check-instance-type"
   body = file("../policies/plan/check-instance-type.rego")
+  type = "PLAN"
+  space_id = data.spacelift_current_space.id
 }
 
 resource "spacelift_policy_attachment" "check-instance-type" {
