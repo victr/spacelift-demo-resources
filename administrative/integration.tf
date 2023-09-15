@@ -17,12 +17,12 @@ resource "spacelift_aws_integration" "this" {
   space_id                       = data.spacelift_current_space.this.id
 }
 
-data "spacelift_aws_integration_attachment_external_id" "ec2-deployment-stack" {
-  integration_id = spacelift_aws_integration.this.id
-  stack_id       = "ec2-deployment"
-  read           = true
-  write          = true
-}
+# data "spacelift_aws_integration_attachment_external_id" "ec2-deployment-stack" {
+#   integration_id = spacelift_aws_integration.this.id
+#   stack_id       = "ec2-deployment"
+#   read           = true
+#   write          = true
+# }
 
 
 resource "aws_iam_role" "this" {
