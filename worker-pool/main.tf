@@ -1,47 +1,93 @@
-resource "spacelift_worker_pool" "demo-ASG" {
-  name        = "Demo-ASG"
-  csr         = filebase64("./spacelift.csr")
-  description = "Used for all type jobs"
-  space_id    = data.spacelift_current_space.this.id
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.6"
+    }
+
+    spacelift = {
+      source  = "spacelift-io/spacelift"
+      version = "~> 0.1"
+    }
+  }
 }
 
-
-resource "spacelift_environment_variable" "worker_pool_config" {
-  stack_id = "demo-worker-pool"
-  name     = "TF_VAR_worker_pool_config"
-  value    = file("./worker-pool.config")
+provider "aws" {
+  region = "us-east-1"
 }
 
-resource "spacelift_environment_variable" "worker_pool_private_key" {
-  stack_id = "demo-worker-pool"
-  name     = "TF_VAR_worker_pool_private_key"
-  value    = file("./private.key")
+provider "spacelift" {
 }
 
-resource "spacelift_environment_variable" "worker_pool_security_groups" {
-  stack_id = "demo-worker-pool"
-  name     = "TF_VAR_worker_pool_security_groups"
-  value    = jsonencode([data.aws_security_groups.dev_sg.ids])
+# Used to randomize the resources names to avoid conflicts
+resource "random_string" "suffix" {
+  length  = 8
+  lower   = false
+  special = false
 }
 
-resource "spacelift_environment_variable" "worker_pool_subnets" {
-  stack_id = "demo-worker-pool"
-  name     = "TF_VAR_worker_pool_subnets"
-  value    = jsonencode([data.aws_subnets.dev_public_subnets])
-}
-
-
-module "my_workerpool" {
-  source = "github.com/spacelift-io/terraform-aws-spacelift-workerpool-on-ec2?ref=v1.3.0"
+module "worker_pool" {
+  source = "github.com/spacelift-io/terraform-aws-spacelift-workerpool-on-ec2?ref=misc-improvements"
 
   configuration = <<-EOT
-    export SPACELIFT_TOKEN="${var.worker_pool_config}"
-    export SPACELIFT_POOL_PRIVATE_KEY="${var.worker_pool_private_key}"
+    export SPACELIFT_TOKEN="${spacelift_worker_pool.aws.config}"
+    export SPACELIFT_POOL_PRIVATE_KEY="${base64encode(tls_private_key.main.private_key_pem)}"
   EOT
 
-  min_size        = 1
   max_size        = 1
-  worker_pool_id  = spacelift_worker_pool.demo-ASG.id
-  security_groups = data.aws_security_groups.dev_sg.ids
-  vpc_subnets     = data.aws_subnets.dev_public_subnets.ids
+  min_size        = 1
+  security_groups = [aws_security_group.main.id]
+  vpc_subnets     = module.vpc.private_subnets
+  worker_pool_id  = spacelift_worker_pool.aws.id
+}
+
+# All the resources below are created here so that this example is self-contained.
+# They could be created elsewhere and the values would then be passed as variables
+# and used by the "worker_pool" module above.
+
+module "vpc" {
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "3.18.1"
+
+  azs                = ["us-east-1a"]
+  cidr               = "10.1.0.0/16"
+  enable_nat_gateway = true
+  name               = "worker-pool-example-${random_string.suffix.id}"
+  private_subnets    = ["10.1.1.0/24"]
+  public_subnets     = ["10.1.2.0/24"]
+}
+
+resource "aws_security_group" "main" {
+  name        = "worker-pool-example-${random_string.suffix.id}"
+  description = "Worker pool security group, with unrestricted egress and no ingress"
+  vpc_id      = module.vpc.vpc_id
+
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
+}
+
+resource "spacelift_worker_pool" "aws" {
+  csr  = base64encode(tls_cert_request.main.cert_request_pem)
+  name = "AWS EC2 Worker Pool Example - ${random_string.suffix.id}"
+}
+
+# The private key and certificate are generated in Terraform for convenience in this demo.
+# For improved security, we recommend that you create and manage them outside of Terraform.
+# See https://docs.spacelift.io/concepts/worker-pools#setting-up.
+resource "tls_private_key" "main" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+
+resource "tls_cert_request" "main" {
+  private_key_pem = tls_private_key.main.private_key_pem
+
+  subject {
+    organization = "Spacelift Examples"
+  }
 }
