@@ -36,8 +36,8 @@ module "worker_pool" {
 
   max_size        = 1
   min_size        = 1
-  security_groups = data.aws_security_groups.this
-  vpc_subnets     = data.aws_subnets.this
+  security_groups = data.aws_security_groups.this.ids
+  vpc_subnets     = data.aws_subnets.this.ids
   worker_pool_id  = spacelift_worker_pool.aws.id
 }
 
