@@ -12,9 +12,19 @@ resource "spacelift_policy" "check-instance-type" {
   space_id = "demo-resources-01H7T746B176K9S5MH0N63MGPH"
 }
 
+resource "spacelift_policy_attachment" "check-instance-type-attachment" {
+  policy_id = spacelift_policy.check-instance-type.id
+  stack_id  = spacelift_stack.EC2-deployment.id
+}
+
 resource "spacelift_policy" "require-two-approvals" {
   name     = "require-two-approvals"
   body     = file("../policies/approval/require-two-approvals.rego")
   type     = "APPROVAL"
   space_id = "demo-resources-01H7T746B176K9S5MH0N63MGPH"
+}
+
+resource "spacelift_policy_attachment" "require-two-approvals-attachment" {
+  policy_id = spacelift_policy.require-two-approvals.id
+  stack_id  = spacelift_stack.EC2-deployment.id
 }

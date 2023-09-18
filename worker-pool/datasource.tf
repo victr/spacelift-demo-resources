@@ -11,11 +11,3 @@ data "aws_security_groups" "this" {
       Name = "dev_sg"
     }
 }
-
-output "subnet" {
-    value = data.aws_subnets.this.ids
-}
-
-output "sg" {
-    value = data.aws_security_groups.this.ids
-}
