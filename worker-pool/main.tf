@@ -36,8 +36,8 @@ module "worker_pool" {
 
   max_size        = 1
   min_size        = 1
-  security_groups = [aws_security_group.main.id]
-  vpc_subnets     = module.vpc.private_subnets
+  security_groups = data.aws_security_groups.this
+  vpc_subnets     = data.aws_subnets.this
   worker_pool_id  = spacelift_worker_pool.aws.id
 }
 
@@ -45,31 +45,31 @@ module "worker_pool" {
 # They could be created elsewhere and the values would then be passed as variables
 # and used by the "worker_pool" module above.
 
-module "vpc" {
-  source  = "terraform-aws-modules/vpc/aws"
-  version = "3.18.1"
+# module "vpc" {
+#   source  = "terraform-aws-modules/vpc/aws"
+#   version = "3.18.1"
 
-  azs                = ["us-east-1a"]
-  cidr               = "10.1.0.0/16"
-  enable_nat_gateway = true
-  name               = "worker-pool-example-${random_string.suffix.id}"
-  private_subnets    = ["10.1.1.0/24"]
-  public_subnets     = ["10.1.2.0/24"]
-}
+#   azs                = ["us-east-1a"]
+#   cidr               = "10.1.0.0/16"
+#   enable_nat_gateway = true
+#   name               = "worker-pool-example-${random_string.suffix.id}"
+#   private_subnets    = ["10.1.1.0/24"]
+#   public_subnets     = ["10.1.2.0/24"]
+# }
 
-resource "aws_security_group" "main" {
-  name        = "worker-pool-example-${random_string.suffix.id}"
-  description = "Worker pool security group, with unrestricted egress and no ingress"
-  vpc_id      = module.vpc.vpc_id
+# resource "aws_security_group" "main" {
+#   name        = "worker-pool-example-${random_string.suffix.id}"
+#   description = "Worker pool security group, with unrestricted egress and no ingress"
+#   vpc_id      = module.vpc.vpc_id
 
-  egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
-  }
-}
+#   egress {
+#     from_port        = 0
+#     to_port          = 0
+#     protocol         = "-1"
+#     cidr_blocks      = ["0.0.0.0/0"]
+#     ipv6_cidr_blocks = ["::/0"]
+#   }
+# }
 
 resource "spacelift_worker_pool" "aws" {
   csr  = base64encode(tls_cert_request.main.cert_request_pem)
