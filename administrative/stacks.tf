@@ -1,6 +1,6 @@
 
 resource "spacelift_stack" "EC2-deployment" {
-  space_id                     = spacelift.space.demo-resources.id
+  space_id                     = spacelift_space.demo-resources.id
   branch                       = "main"
   description                  = "this stack will deploy a basic ec2 instance"
   name                         = "EC2-deployment"
