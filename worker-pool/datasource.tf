@@ -13,9 +13,9 @@ data "aws_security_groups" "this" {
 }
 
 output "subnet" {
-    value = data.aws_subnets.this
+    value = data.aws_subnets.this.ids
 }
 
 output "sg" {
-    value = data.aws_security_groups.this
+    value = data.aws_security_groups.this.ids
 }
