@@ -1,4 +1,4 @@
-resource "spacelift_blueprint" "AWS environment" {
+resource "spacelift_blueprint" "AWS-environment" {
     name        = "AWS-Environment"
     description = "Environment for AWS"
     space       = "root"
