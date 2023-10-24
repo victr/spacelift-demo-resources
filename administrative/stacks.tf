@@ -25,3 +25,4 @@ resource "spacelift_stack" "demo-worker-pool" {
     namespace = "jubranNassar"
   }
 }
+
