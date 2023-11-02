@@ -9,7 +9,15 @@ terraform {
 
 provider "aws" {
   region = "us-east-1"
+}
+
+provider "aws" {
+  alias = "second-account"
+  region = "us-east-1"
+
   assume_role {
     role_arn = "arn:aws:iam::657848498343:role/test-role"
+    session_name = var.spacelift.run_id
+    external_id = "my-first-env@*"
   }
 }
