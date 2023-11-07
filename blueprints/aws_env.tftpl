@@ -10,7 +10,6 @@ inputs:
     options:
       - legacy
       - root
-      - demo-resources-01HAMPER0Z2280BG4GGR1MD2BQ
   - id: trigger_run
     name: Trigger a run upon stack creation
     type: boolean
@@ -47,8 +46,9 @@ stack:
   vcs:
     branch: main
     repository: demo-resources
-    provider: GITHUB_ENTERPRISE
+    provider: RAW_GIT
     namespace: jubranNassar
+    url: https://github.com/jubranNassar/demo-resources
     project_root: aws-demo
   vendor:
     terraform:
