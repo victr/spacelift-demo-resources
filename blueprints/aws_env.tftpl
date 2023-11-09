@@ -44,10 +44,9 @@ stack:
   labels:
     - "blueprints/$${{ context.blueprint.name }}"
   vcs:
+    provider: GIT
+    repository_url: https://github.com/jubranNassar/demo-resources
     branch: main
-    repository: demo-resources
-    provider: GITHUB_ENTERPRISE
-    namespace: jubranNassar
     project_root: aws-demo
   vendor:
     terraform:
