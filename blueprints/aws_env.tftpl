@@ -44,11 +44,11 @@ stack:
   labels:
     - "blueprints/$${{ context.blueprint.name }}"
   vcs:
-    provider: GIT
-    repository_url: https://github.com/jubranNassar/demo-resources
     branch: main
+    provider: GIT
+    repository_url: "https://github.com/jubranNassar/demo-resources"
     project_root: aws-demo
-  vendor:
+  vendor: 
     terraform:
       manage_state: true
       version: "1.5.6"
