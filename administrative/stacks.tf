@@ -7,8 +7,9 @@ resource "spacelift_stack" "EC2-deployment" {
   project_root                 = "ec2-deployment"
   repository                   = "demo-resources"
   terraform_smart_sanitization = true
-  github_enterprise {
-    namespace = "jubranNassar"
+  raw_git {
+    namespace = var.namespace
+    url = var.url
   }
 }
 
@@ -25,8 +26,9 @@ resource "spacelift_stack" "demo-worker-pool" {
   project_root                 = "worker-pool"
   repository                   = "demo-resources"
   terraform_smart_sanitization = true
-  github_enterprise {
-    namespace = "jubranNassar"
+  raw_git {
+    namespace = var.namespace
+    url = var.url
   }
 }
 
