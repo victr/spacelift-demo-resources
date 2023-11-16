@@ -1,9 +1,7 @@
 variable "instance_size" {
     description = "Specify instance type."
-    default = "t2.micro"
 }
 
-variable "node_name" {
-    description = "Specify the node name."
-    default = "sl-node"
+variable "instance_name" {
+    description = "Specify a name for this instance"
 }
