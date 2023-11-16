@@ -1,8 +1,8 @@
 inputs:
   - id: stack_name
     name: The name of the stack
-  - id: environment_name
-    name: Name of the environment
+  - id: instance_name
+    name: The name of the instance
   - id: space
     name: Name of the space where the stack should be. Defaults to root.
     type: select
@@ -60,10 +60,10 @@ stack:
         write: true 
   environment:
     variables:
+      - name: TF_VAR_instance_name
+        value: $${{ input.instance_name }}
       - name: AWS_REGION
         value: $${{ inputs.aws_region }}
-      - name: TF_VAR_node_name
-        value: $${{ inputs.environment_name }}
       - name: TF_VAR_instance_size
         value: $${{ inputs.instance_size }}
 options:
