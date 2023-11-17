@@ -15,8 +15,8 @@ resource "spacelift_stack" "EC2-deployment" {
 
 resource "spacelift_stack_destructor" "EC2-deployment" {
   depends_on = [
-    spacelift_policy_attachment.check-instance-type-attachment,
-    spacelift_policy_attachment.require-two-approvals-attachment
+    spacelift_policy.check-instance-type,
+    spacelift_policy.require-two-approvals
   ]
   stack_id = spacelift_stack.EC2-deployment.id
 }
