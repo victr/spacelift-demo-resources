@@ -1,7 +1,7 @@
 variable "namespace" {
-    default = "jubranNassar"
+  default = "jubranNassar"
 }
 
 variable "url" {
-    default = "https://github.com/jubranNassar/demo-resources"
+  default = "https://github.com/jubranNassar/demo-resources"
 }

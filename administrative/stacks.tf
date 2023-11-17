@@ -9,11 +9,14 @@ resource "spacelift_stack" "EC2-deployment" {
   terraform_smart_sanitization = true
   raw_git {
     namespace = var.namespace
-    url = var.url
+    url       = var.url
   }
 }
 
 resource "spacelift_stack_destructor" "EC2-deployment" {
+  depends_on = [
+    spacelift_aws_integration.this
+  ]
   stack_id = spacelift_stack.EC2-deployment.id
 }
 
@@ -28,7 +31,7 @@ resource "spacelift_stack" "demo-worker-pool" {
   terraform_smart_sanitization = true
   raw_git {
     namespace = var.namespace
-    url = var.url
+    url       = var.url
   }
 }
 
