@@ -14,9 +14,6 @@ resource "spacelift_stack" "EC2-deployment" {
 }
 
 resource "spacelift_stack_destructor" "EC2-deployment" {
-  depends_on = [
-    spacelift_aws_integration.this
-  ]
   stack_id = spacelift_stack.EC2-deployment.id
 }
 
