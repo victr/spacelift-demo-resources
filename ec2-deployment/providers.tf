@@ -7,10 +7,16 @@ terraform {
   }
 }
 
-# provider "aws" {
-#   region = "us-east-1"
-# }
-
 provider "aws" {
   region = "us-east-1"
+}
+
+provider "aws" {
+  alias = "prod"
+  region = "us-east-1"
+
+  assume_role {
+    role_arn = "arn:aws:iam::262653892496:role/jubran-cross-account"
+    session_name = var.spacelift.run_id
+  }
 }
