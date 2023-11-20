@@ -92,3 +92,7 @@ resource "tls_cert_request" "main" {
     organization = "Spacelift Examples"
   }
 }
+
+output "this" {
+  value = spacelift_worker_pool.aws.private_key
+}
