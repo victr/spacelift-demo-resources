@@ -95,4 +95,5 @@ resource "tls_cert_request" "main" {
 
 output "this" {
   value = spacelift_worker_pool.aws.private_key
+  sensitive = true
 }
