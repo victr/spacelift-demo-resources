@@ -17,8 +17,8 @@ provider "aws" {
 
   assume_role {
     role_arn = "arn:aws:iam::262653892496:role/jubran-cross-account"
-    session_name = var.spacelift.run_id
+    session_name = var.spacelift_run_id
   }
 }
 
-variable "spacelift.run_id" {}
+variable "spacelift_run_id" {}
