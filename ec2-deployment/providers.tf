@@ -20,3 +20,5 @@ provider "aws" {
     session_name = var.spacelift.run_id
   }
 }
+
+variable "spacelift.run_id" {}
