@@ -12,6 +12,5 @@ terraform {
 # }
 
 provider "aws" {
-  alias = "second-account"
   region = "us-east-1"
 }
