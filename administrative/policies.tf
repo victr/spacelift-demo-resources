@@ -3,14 +3,11 @@ resource "spacelift_policy" "check-instance-type" {
   body     = file("../policies/plan/check-instance-type.rego")
   type     = "PLAN"
   space_id = spacelift_space.demo-resources.id
-  depends_on = [
-    spacelift_stack.EC2-deployment
-  ]
 }
 
 resource "spacelift_policy_attachment" "check-instance-type-attachment" {
   policy_id = spacelift_policy.check-instance-type.id
-  stack_id  = spacelift_stack.EC2-deployment.id
+  stack_id  = module.EC2-deployment.spacelift_stack.id
 }
 
 resource "spacelift_policy" "require-two-approvals" {
