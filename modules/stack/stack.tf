@@ -7,9 +7,12 @@ resource "spacelift_stack" "this" {
   repository                   = var.repository
   terraform_smart_sanitization = true
   administrative               = false
+  terraform_workflow_tool      = "OPEN_TOFU"
 
-  raw_git {
-    namespace = var.namespace
-    url       = var.url
+  dynamic "github_enterprise" {
+    for_each = var.github_organization == null ? [] : [true]
+    content {
+      namespace = var.github_organization
+    }
   }
 }

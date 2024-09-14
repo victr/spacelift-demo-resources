@@ -32,3 +32,8 @@ variable "namespace" {
 variable "url" {
   default = "https://github.com/jubranNassar/demo-resources"
 }
+
+variable "github_organization" {
+  type    = string
+  default = "jubranNassar"
+}
