@@ -4,7 +4,7 @@ resource "spacelift_stack" "EC2-deployment" {
   branch                       = "main"
   description                  = "this stack will deploy a basic ec2 instance"
   name                         = "EC2-deployment"
-  project_root                 = "ec2-deployment"
+  project_root                 = "aws-module"
   repository                   = "demo-resources"
   terraform_smart_sanitization = true
   raw_git {
@@ -40,4 +40,12 @@ resource "spacelift_stack" "demo-worker-pool" {
     namespace = var.namespace
     url       = var.url
   }
+}
+
+
+module "test-stack" {
+  source     = "../modules/stack"
+  name       = "test-stack"
+  space_id   = spacelift_space.demo-resources.id
+  repository = "demo-resource"
 }

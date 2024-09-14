@@ -8,7 +8,7 @@ terraform {
 }
 
 provider "aws" {
-  region = "us-east-1"
+  region = var.aws_region
 }
 
 module "ec2-environment" {
@@ -17,6 +17,6 @@ module "ec2-environment" {
 
   name = var.instance_name
   # Required inputs 
-  instance_type = var.instance_size
+  instance_type = var.instance_type
   ami           = data.aws_ami.dev_server_ami.id
 }
