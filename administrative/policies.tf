@@ -7,7 +7,7 @@ resource "spacelift_policy" "check-instance-type" {
 
 resource "spacelift_policy_attachment" "check-instance-type-attachment" {
   policy_id = spacelift_policy.check-instance-type.id
-  stack_id  = module.EC2-deployment.spacelift_stack.this.spacelift_stack.this.id
+  stack_id  = spacelift_stack.EC2-deployment.id
 }
 
 # resource "spacelift_policy" "require-two-approvals" {
