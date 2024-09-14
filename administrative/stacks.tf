@@ -1,5 +1,6 @@
 
 module "EC2-deployment" {
+  space_id = spacelift_space.demo-resources.id
   source       = "../modules/stack"
   name         = "EC2-deployment"
   project_root = "aws-module"
@@ -8,6 +9,7 @@ module "EC2-deployment" {
 
 
 module "demo-worker-pool" {
+  space_id = spacelift_space.demo-resources.id
   source       = "../modules/stack"
   name         = "demo-worker-pool"
   project_root = "worker-pool"
