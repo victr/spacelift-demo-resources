@@ -13,11 +13,3 @@ module "demo-worker-pool" {
   project_root = "worker-pool"
   description  = "This stack will be in charge of creating our worker pool"
 }
-
-
-module "test-stack" {
-  source     = "../modules/stack"
-  name       = "module-test-stack"
-  space_id   = spacelift_space.demo-resources.id
-  repository = "demo-resources"
-}
