@@ -10,7 +10,6 @@ variable "description" {
 
 variable "space_id" {
   type    = string
-  default = "demo-resources-01J7PNJ4PVTZJPPC8AYAK8HANZ"
 }
 
 variable "name" {

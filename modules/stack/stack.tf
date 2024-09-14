@@ -1,5 +1,5 @@
 resource "spacelift_stack" "this" {
-  space_id                     = var.space_id
+  space_id                     = data.spacelift_space_by_path.this.id
   branch                       = var.branch
   description                  = var.description
   name                         = var.name
