@@ -8,7 +8,7 @@ module "EC2-deployment" {
 }
 
 output "stack_id" {
-  value = "${module.EC2-deploymen.spacelift_stack.this.id}"
+  value = "${module.EC2-deployment.spacelift_stack.this.id}"
 }
 
 module "demo-worker-pool" {
