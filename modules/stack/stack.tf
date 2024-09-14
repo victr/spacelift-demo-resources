@@ -16,4 +16,3 @@ resource "spacelift_stack" "this" {
     }
   }
 }
-

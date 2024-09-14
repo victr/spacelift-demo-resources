@@ -7,9 +7,7 @@ module "EC2-deployment" {
   description  = "this stack will deploy a basic ec2 instance"
 }
 
-output "stack_id" {
-  value = "${module.EC2-deployment.spacelift_stack.this.id}"
-}
+
 
 module "demo-worker-pool" {
   space_id = spacelift_space.demo-resources.id
