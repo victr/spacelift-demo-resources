@@ -9,7 +9,8 @@ variable "description" {
 }
 
 variable "space_id" {
-  type = string
+  type    = string
+  default = "demo-resources-01J7PNJ4PVTZJPPC8AYAK8HANZ"
 }
 
 variable "name" {
@@ -22,16 +23,10 @@ variable "project_root" {
 }
 
 variable "repository" {
-  type = string
+  type    = string
+  default = "demo-resources"
 }
 
-variable "namespace" {
-  default = "jubranNassar"
-}
-
-variable "url" {
-  default = "https://github.com/jubranNassar/demo-resources"
-}
 
 variable "github_organization" {
   type    = string
