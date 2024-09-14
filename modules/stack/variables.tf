@@ -9,7 +9,7 @@ variable "description" {
 }
 
 variable "space_id" {
-  type    = string
+  type = string
 }
 
 variable "name" {
