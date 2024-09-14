@@ -13,6 +13,20 @@ resource "spacelift_stack" "EC2-deployment" {
   }
 }
 
+resource "spacelift_stack" "module-deployment" {
+  space_id                     = spacelift_space.demo-resources.id
+  branch                       = "main"
+  description                  = "this stack will deploy a basic ec2 instance"
+  name                         = "EC2 module deploymentusing an AWS EC2 module"
+  project_root                 = "aws-module"
+  repository                   = "demo-resources"
+  terraform_smart_sanitization = true
+  raw_git {
+    namespace = var.namespace
+    url       = var.url
+  }
+}
+
 resource "spacelift_stack" "demo-worker-pool" {
   administrative               = true
   space_id                     = spacelift_space.demo-resources.id
