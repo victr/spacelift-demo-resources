@@ -7,7 +7,7 @@ data "aws_subnets" "this" {
 }
 
 data "aws_security_groups" "this" {
-    tags = {
-      Name = "dev_sg"
-    }
+  tags = {
+    Name = "dev_sg"
+  }
 }
