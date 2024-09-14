@@ -1,4 +1,4 @@
-resource "spacelift_stack" "EC2-deployment" {
+resource "spacelift_stack" "this" {
   space_id                     = var.space_id
   branch                       = var.branch
   description                  = var.description

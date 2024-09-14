@@ -45,7 +45,7 @@ resource "spacelift_stack" "demo-worker-pool" {
 
 module "test-stack" {
   source     = "../modules/stack"
-  name       = "test-stack"
+  name       = "module-test-stack"
   space_id   = spacelift_space.demo-resources.id
   repository = "demo-resource"
 }
