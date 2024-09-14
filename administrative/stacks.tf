@@ -47,5 +47,5 @@ module "test-stack" {
   source     = "../modules/stack"
   name       = "module-test-stack"
   space_id   = spacelift_space.demo-resources.id
-  repository = "demo-resource"
+  repository = "demo-resources"
 }
