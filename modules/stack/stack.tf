@@ -17,10 +17,3 @@ resource "spacelift_stack" "this" {
   }
 }
 
-output "stack_id" {
-  value = spacelift_stack.this.id
-}
-
-output "test" {
-  value = "test"
-}
