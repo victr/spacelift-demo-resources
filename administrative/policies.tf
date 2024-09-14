@@ -5,11 +5,10 @@ resource "spacelift_policy" "check-instance-type" {
   space_id = spacelift_space.demo-resources.id
 }
 
-resource "spacelift_policy_attachment" "check-instance-type-attachment" {
-  policy_id = spacelift_policy.check-instance-type.id
-  stack_id  = module.EC2-deployment.id
-            //module.EC2-deployment.spacelift_stack.this
-}
+# resource "spacelift_policy_attachment" "check-instance-type-attachment" {
+#   policy_id = spacelift_policy.check-instance-type.id
+#   stack_id  = module.EC2-deployment.id
+# }
 
 # resource "spacelift_policy" "require-two-approvals" {
 #   name     = "require-two-approvals"
