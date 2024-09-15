@@ -31,3 +31,7 @@ variable "github_organization" {
   type    = string
   default = "jubranNassar"
 }
+
+variable "aws_integration" {
+  type = string
+}

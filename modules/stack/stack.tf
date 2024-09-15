@@ -16,3 +16,11 @@ resource "spacelift_stack" "this" {
     }
   }
 }
+
+resource "spacelift_aws_integration_attachment" "this" {
+  integration_id = data.spacelift_aws_integration.this.id
+  stack_id       = spacelift_stack.this.id
+  read           = true
+  write          = true
+}
+
