@@ -33,5 +33,6 @@ variable "github_organization" {
 }
 
 variable "aws_integration" {
-  type = string
+  type    = string
+  default = "jubran-aws-account"
 }
