@@ -3,7 +3,7 @@ resource "spacelift_aws_integration_attachment" "ec2-deployment" {
   stack_id       = "ec2-deployment"
   read           = true
   write          = true
-  depends_on = [ module.EC2-deployment]
+  depends_on     = [module.EC2-deployment]
 }
 
 resource "spacelift_aws_integration_attachment" "demo-worker-pool" {
@@ -11,5 +11,5 @@ resource "spacelift_aws_integration_attachment" "demo-worker-pool" {
   stack_id       = "demo-worker-pool"
   read           = true
   write          = true
-  depends_on = [ module.demo-worker-pool ]
+  depends_on     = [module.demo-worker-pool]
 }

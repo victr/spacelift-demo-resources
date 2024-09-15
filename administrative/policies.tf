@@ -6,9 +6,9 @@ resource "spacelift_policy" "check-instance-type" {
 }
 
 resource "spacelift_policy_attachment" "check-instance-type-attachment" {
-  policy_id = spacelift_policy.check-instance-type.id
-  stack_id  = "ec2-deployment"
-  depends_on = [ module.EC2-deployment ]
+  policy_id  = spacelift_policy.check-instance-type.id
+  stack_id   = "ec2-deployment"
+  depends_on = [module.EC2-deployment]
 }
 
 resource "spacelift_policy" "require-two-approvals" {
@@ -19,7 +19,7 @@ resource "spacelift_policy" "require-two-approvals" {
 }
 
 resource "spacelift_policy_attachment" "require-two-approvals-attachment" {
-  policy_id = spacelift_policy.require-two-approvals.id
-  stack_id  = "ec2-deployment"
-  depends_on = [ module.EC2-deployment ]
+  policy_id  = spacelift_policy.require-two-approvals.id
+  stack_id   = "ec2-deployment"
+  depends_on = [module.EC2-deployment]
 }
