@@ -10,7 +10,7 @@ approve {
 }
 
 approve {
-	count(input.reviews.current.approvals) > 0
+	count(input.reviews.current.approvals) > 1
 	count(input.reviews.current.rejections) == 0
 }
 
