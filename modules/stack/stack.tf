@@ -15,6 +15,13 @@ resource "spacelift_stack" "this" {
       namespace = var.github_organization
     }
   }
+
+  # dynamic "gitlab" {
+  #   for_each = var.gitlab_organization == null ? [] : [true]
+  #   content {
+  #     namespace = var.gitlab_organization
+  #   }
+  # }
 }
 
 resource "spacelift_aws_integration_attachment" "this" {

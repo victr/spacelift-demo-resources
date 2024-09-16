@@ -32,6 +32,10 @@ variable "github_organization" {
   default = "jubranNassar"
 }
 
+# variable "gitlab_organization" {
+#     type = string
+# }
+
 variable "aws_integration" {
   type    = string
   default = "jubran-aws-account"
