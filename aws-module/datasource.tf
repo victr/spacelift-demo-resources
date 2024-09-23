@@ -7,3 +7,7 @@ data "aws_ami" "dev_server_ami" {
     values = ["ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*"]
   }
 }
+
+data "spacelift_aws_integration" "this" {
+  name = var.integration_name
+}

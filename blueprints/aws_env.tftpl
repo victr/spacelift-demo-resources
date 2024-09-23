@@ -26,7 +26,6 @@ inputs:
     type: select
     options:
 %{ for integration in integrations ~}
-set ${integration.name} = ${integration.integration_id}
       - ${integration.name}
 %{ endfor ~}
   - id: instance_size
@@ -68,5 +67,7 @@ stack:
         value: $${{ inputs.aws_region }}
       - name: TF_VAR_instance_size
         value: $${{ inputs.instance_size }}
+      - name: TF_VAR_integration_name
+        value: $${{ inputs.integration }}
 options:
   trigger_run: $${{ inputs.trigger_run }}
