@@ -22,11 +22,11 @@ inputs:
       - us-east-1
       - us-west-1
   - id: integration
-    name: Choose AWS Account %{for integration in integrations}${integration.integration_id}-${integration.name} %{endfor}
+    name: Choose AWS Account
     type: select
     options:
 %{ for integration in integrations ~}
-      - ${ integration.integration_id }
+      - ${ integration.name }
 %{ endfor ~}
   - id: instance_size
     name: Size of the Instance
