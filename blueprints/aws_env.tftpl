@@ -53,12 +53,6 @@ stack:
       manage_state: true
       version: "1.5.6"
       use_smart_sanitization: true
-  attachments:
-    clouds:
-      aws:
-        id: ${ func_integrations_switch_statement }
-        read: true
-        write: true 
   environment:
     variables:
       - name: TF_VAR_instance_name
