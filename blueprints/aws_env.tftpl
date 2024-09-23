@@ -25,7 +25,6 @@ inputs:
     name: Choose AWS Account
     type: select
     options:
-    
 %{ for integration in integrations ~}
 set ${integration.name} = ${integration.integration_id}
       - ${integration.name}
