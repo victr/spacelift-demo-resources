@@ -23,13 +23,13 @@ variable "project_root" {
 
 variable "repository" {
   type    = string
-  default = "demo-resources"
+  default = "spacelift-demo-resources"
 }
 
 
 variable "github_organization" {
   type    = string
-  default = "jubranNassar"
+  default = "victr"
 }
 
 # variable "gitlab_organization" {
@@ -38,5 +38,5 @@ variable "github_organization" {
 
 variable "aws_integration" {
   type    = string
-  default = "jubran-aws-account"
+  default = "spacelift demo"
 }
